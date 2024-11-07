@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Main Section for both Login and Signup */
+.main-section {
+    display: flex;
+    flex: 1; /* Use remaining space */
+    width: 100%; /* Ensure it takes full width */
+}
+/* Main Login Section Styles */
+.login-section {
+    flex: 1;
+    /* Use remaining space */
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login Form Styles */
+.login-form {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Full width */
+    max-width: 450px;
+    /* Increased max width for larger screens */
+    text-align: center;
+}
+
+/* Title Style */
+.login-title {
+    background-color: #26B170;
+    /* Change to your preferred color */
+    padding: 20px;
+    width: 250px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+    /* Increased space below the title */
+}
+
+.login-form h1 {
+    color: #ffffff;
+}
+
+/* Input Field Styles */
+.input-field {
+
+    width: 100%;
+    padding: 15px;
+    /* Increased padding for larger size */
+    margin: 15px 0;
+    /* Increased margin for more space */
+    background-color: #c4ef90;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    /* Increased font size */
+}
+
+/* Focused Input Field Styles */
+.input-field:focus {
+    outline-color: #00a650;
+
+}
+
+/* Remember Me Section */
+.remember-me {
+    margin: 20px 0;
+    /* Increased space for better separation */
+    text-align: left;
+}
+
+/* Links Styles */
+.forgot-password,
+.resend-confirmation,
+.Register-new-account {
+    display: block;
+    margin: 10px 0;
+    /* Space between links */
+    color: #00a650;
+    text-decoration: none;
+}
+
+/* Button Styles */
+.login-button {
+    width: 200px;
+    padding: 15px;
+    /* Increased padding for larger size */
+    background-color: #00a650;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    /* Increased font size */
+    margin-top: 20px;
+    /* Space above the login button */
+}
+
+/* Signup Section Styles */
+.signup-section {
+    flex: 1;
+
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 100px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.signup-card h2 {
+    color: #005bdb;
+    margin-bottom: 10px;
+}
+
+.signup-button {
+    background-color: #00a650;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 20px;
+}

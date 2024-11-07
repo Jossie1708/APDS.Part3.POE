@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Main Section for both Login and Signup */
+.main-section {
+    display: flex;
+    flex: 1; /* Use remaining space */
+    width: 100%; /* Ensure it takes full width */
+}
+
+/* Main Register Section Styles */
+.register-section {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20px; 
+}
+
+/* Register Form Styles */
+.register-form {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 450px; /* Increased max width for larger screens */
+    text-align:  center; /* Change text alignment to left */
+    margin-top: -55px; 
+}
+
+/* Title Style */
+.register-title {
+    background-color: #7ED34B;
+    padding: 20px;
+    width: 250px;
+    border-radius: 5px;
+    margin-bottom: 50px; /* Increased space below the title */
+}
+
+.register-form h1 {
+    color: #ffffff;
+}
+
+/* Input Field Styles */
+.input-field-register {
+    width: 100%;
+    padding: 15px; /* Increased padding for larger size */
+    margin: 5px 0; /* Reduced margin for better alignment */
+    background-color: #4A9BEA;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px; /* Increased font size */
+}
+.input-field-register::placeholder {
+    color: #ffffff; 
+  }
+
+/* Label Styles */
+label {
+    width: 100%; /* Ensure labels take full width */
+    text-align: left; /* Align text to the left */
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+/* Focused Input Field Styles */
+.input-field:focus {
+    outline-color: #4A9BEA;
+}
+
+
+
+/* Button Styles */
+.signup-button {
+    width: 200px;
+    padding: 15px; /* Increased padding for larger size */
+    background-color: #7ED34B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px; /* Increased font size */
+    margin-top: 20px; /* Space above the login button */
+}

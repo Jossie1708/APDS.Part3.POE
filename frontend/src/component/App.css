@@ -1,38 +1,156 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: Arial, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-container {
+  display: flex;
+  height: 100vh;
+  /* Full viewport height */
+  width: 100vw;
+  /* Full viewport width */
+  overflow: hidden;
+  /* Prevent overflow */
+  position: relative;
+  /* Set as relative for absolute positioning of sidebar */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sidebar {
+  position: absolute;
+  /* Absolute positioning to overlay */
+  top: 0;
+  left: 0;
+  width: 200px;
+  /* Normal width */
+  height: 100vh;
+  /* Full height */
+  background-color: #005bdb;
+  /* Sidebar color */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  transition: transform 0.3s, opacity 0.3s;
+  /* Add transitions for smooth animation */
+  z-index: 1000;
+  /* Ensure it's on top of other content */
+}
+
+.sidebar.collapsed {
+  transform: translateX(-100%);
+  /* Move out of view */
+  opacity: 0;
+  /* Hide completely */
+}
+
+.main-section {
+  flex: 1;
+  /* Use remaining space */
+  width: 100%;
+  /* Ensure it takes full width */
+  position: relative;
+  /* Ensure stacking context */
+  transition: margin-left 0.3s;
+  /* Smooth transition for margin change */
+  z-index: 1;
+  /* Ensure it's behind the sidebar */
+}
+
+.sidebar.collapsed+.main-section {
+  margin-left: 0;
+  /* Keep main section full width when collapsed */
+}
+
+/* Toggle button styles */
+.toggle-button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  /* Ensure it's above everything */
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Align to the left */
+  margin-bottom: 10px;
+  margin-top: 70px;
+}
+/* Logo container styling */
+.logo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-bottom: 30px;
+  border-bottom: 1px solid white;
+  /* White separator line */
+  padding-bottom: 15px;
+}
+
+.logo {
+  width: 100px;
+  height: 102px;
+  background-color: white;
+  border-radius: 80%;
+}
+
+.logo-text {
+  margin-top: 10px;
+}
+
+.logo-text.hidden {
+  display: none;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+.nav-links a {
+  display: block;
   color: white;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 18px;
+  transition: opacity 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar.collapsed .nav-links a {
+  opacity: 0;
+  /* Hide text when sidebar is collapsed */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.signout {
+  margin-top: auto;
+  /* Push signout link to the bottom */
+}
+
+.signout a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-links a.active {
+  font-weight: bold;
+}
+
+.main-section>* {
+  margin-bottom: 10px;
+  /* Space between elements */
 }
