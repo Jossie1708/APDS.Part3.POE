@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
-import './App.css'; 
+import '../App.css';
 
 import EmployeeLogin from '../pages/EmployeeLogin';
 import CustomerLogin from '../pages/CustomerLogin';
 import Register from '../pages/Register';
+import PaymentHub from '../pages/CustomerPaymentHub';
+import Settings from '../pages/Settings';
 
 const NavLink = ({ to, children, onClick }) => {
   const location = useLocation();
@@ -19,6 +21,7 @@ const NavLink = ({ to, children, onClick }) => {
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed((prev) => !prev);
@@ -28,52 +31,48 @@ function App() {
     setIsSidebarCollapsed(true); // Close the sidebar when a nav link is clicked
   };
 
-  // Dynamic button style
-  const buttonStyle = {
-    background: 'transparent',
-    border: 'none',
-    color: isSidebarCollapsed ? '#005bdb' : 'white', // Keep color change
-    fontSize: '30px',
-    cursor: 'pointer',
-    position: 'fixed',
-    top: '20px',
-    left: '20px',
-    zIndex: 1001, // Ensure it's above everything
+  const handleLogin = () => {
+    setIsLoggedIn(true); // Set to true after successful login
   };
 
-  useEffect(() => {
-    const link = document.createElement('link');
-    document.head.appendChild(link);
-
-    return () => {
-      document.head.removeChild(link); // Cleanup
-    };
-  }, []);
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Reset login status on logout
+  };
 
   return (
     <Router>
       <div className="app-container">
-        <button className="toggle-button" onClick={toggleSidebar} style={buttonStyle}>
+        <button className="toggle-button" onClick={toggleSidebar}>
           ☰
         </button>
 
         <div className={`sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
           <div className="logo-container">
-            <h2 className={`logo-text ${isSidebarCollapsed ? 'hidden' : ''}`}>APDS cash app</h2>
+            <h2 className={`logo-text ${isSidebarCollapsed ? 'hidden' : ''}`}>APDS part 3</h2>
           </div>
           <nav className="nav-links">
-            <NavLink to="/" onClick={handleNavClick}>User Login</NavLink>
-            <NavLink to="/employeeLogin" onClick={handleNavClick}>Employee Login</NavLink>
-        
+            {isLoggedIn ? (
+              <>
+                <NavLink to="/settings" onClick={handleNavClick}>Settings</NavLink>
+                <NavLink to="/" onClick={() => { handleLogout(); handleNavClick(); }}>Log Out</NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink to="/" onClick={handleNavClick}>User Login</NavLink>
+                <NavLink to="/employeeLogin" onClick={handleNavClick}>Employee Login</NavLink>
+                <NavLink to="/settings" onClick={handleNavClick}>Settings</NavLink>
+              </>
+            )}
           </nav>
         </div>
 
         <div className={`main-section ${isSidebarCollapsed ? 'collapsed' : ''}`}>
           <Routes>
-            <Route path="/" element={<CustomerLogin />} />
-            <Route path="/employeeLogin" element={<EmployeeLogin />} />
+            <Route path="/" element={<CustomerLogin onLogin={handleLogin} />} />
+            <Route path="/employeeLogin" element={<EmployeeLogin onLogin={handleLogin} />} />
             <Route path="/register" element={<Register />} />
-           
+            <Route path="/paymentHub" element={<PaymentHub />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
       </div>

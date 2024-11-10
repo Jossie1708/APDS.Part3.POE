@@ -1,5 +1,5 @@
 import React from 'react';
-import './EmployeeLogin.css'; // Custom styles for the login page
+import '../App.css';
 
 function Login() {
   return (
@@ -7,20 +7,20 @@ function Login() {
       <div className="app-container">
         
         {/* Main Login Section */}
-        <div className="employee-login-section">
-          <div className="employee-login-form">
-          <div class="employee-card">
-            <div className="employee-login-title">
+        <div className="login-section">
+          <div className="login-form">
+          <div class="card">
+            <div className="login-title">
               <h1>Employee Login</h1>
             </div>
             <div className="label-input-group">
-            <label className="employee-label"> Employee email</label>
-            <input type="email" placeholder="Type your email" className="employee-input-field" />
-            <label className="employee-label">Password</label>
-            <input type="password" placeholder="Type your password" className="employee-input-field" />
+            <label className="label"> Employee email</label>
+            <input type="Email" placeholder="Type your email" className="input-field" />
+            <label className="label">Password</label>
+            <input type="password" placeholder="Type your password" className="input-field" />
             
           </div>
-          <button className="employee-login-button">Log in</button>
+          <button className="login-button">Log in</button>
           </div>
           </div>
         </div>
