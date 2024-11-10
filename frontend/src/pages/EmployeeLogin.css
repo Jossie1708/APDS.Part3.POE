@@ -6,9 +6,10 @@
 
 body {
     font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#126171,#126171);
 }
 
-.app-container {
+.emplopyee-app-container {
     display: flex;
     height: 100vh; /* Full viewport height */
     width: 100vw; /* Full viewport width */
@@ -16,13 +17,13 @@ body {
 }
 
 /* Main Section for both Login and Signup */
-.main-section {
+.emplopyee-main-section {
     display: flex;
     flex: 1; /* Use remaining space */
     width: 100%; /* Ensure it takes full width */
 }
 /* Main Login Section Styles */
-.login-section {
+.emplopyee-login-section {
     flex: 1;
     /* Use remaining space */
     background-color: white;
@@ -33,7 +34,7 @@ body {
 }
 
 /* Login Form Styles */
-.login-form {
+.emplopyee-login-form {
     align-items: center;
     width: 100%;
     display: flex;
@@ -45,8 +46,8 @@ body {
 }
 
 /* Title Style */
-.login-title {
-    background-color: #26B170;
+.emplopyee-login-title {
+    background-color: #45A994;
     /* Change to your preferred color */
     padding: 20px;
     width: 250px;
@@ -55,19 +56,19 @@ body {
     /* Increased space below the title */
 }
 
-.login-form h1 {
+.emplopyee-login-form h1 {
     color: #ffffff;
 }
 
 /* Input Field Styles */
-.input-field {
+.emplopyee-input-field {
 
     width: 100%;
     padding: 15px;
     /* Increased padding for larger size */
     margin: 15px 0;
     /* Increased margin for more space */
-    background-color: #c4ef90;
+    background-color: #45A994;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -75,36 +76,36 @@ body {
 }
 
 /* Focused Input Field Styles */
-.input-field:focus {
-    outline-color: #00a650;
+.emplopyee-input-field:focus {
+    outline-color: #0f4b4d;
 
 }
 
 /* Remember Me Section */
-.remember-me {
+.emplopyee-remember-me {
     margin: 20px 0;
     /* Increased space for better separation */
     text-align: left;
 }
 
 /* Links Styles */
-.forgot-password,
-.resend-confirmation,
-.Register-new-account {
+.emplopyee-forgot-password,
+.emplopyee-resend-confirmation,
+.emplopyee-Register-new-account {
     display: block;
     margin: 10px 0;
     /* Space between links */
-    color: #00a650;
+    color: #45A994;
     text-decoration: none;
 }
 
 /* Button Styles */
-.login-button {
+.emplopyee-login-button {
     width: 200px;
     padding: 15px;
     /* Increased padding for larger size */
-    background-color: #00a650;
-    color: white;
+    background-color: #45A994;
+    color: 0f4b4d;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -114,36 +115,6 @@ body {
     /* Space above the login button */
 }
 
-/* Signup Section Styles */
-.signup-section {
-    flex: 1;
 
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.signup-card {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 100px;
-    text-align: center;
-    border-radius: 10px;
-}
 
-.signup-card h2 {
-    color: #005bdb;
-    margin-bottom: 10px;
-}
-
-.signup-button {
-    background-color: #00a650;
-    color: white;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    margin-top: 20px;
-}
