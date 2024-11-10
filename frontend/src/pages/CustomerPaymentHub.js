@@ -1,13 +1,14 @@
 import React from 'react';
-import './CustomerPaymentHub.css'; // Custom styles for the payment hub page
+import '../App.css';  
 
 function PaymentHub() {
     return (
-        <div className="payment-app-container">
-            <div className="payment-main-section">
-                <div className="payment-card">
-                    <h3 className="payment-header">Transaction Notice Board</h3>
-                    <button className="payment-button">Logout</button>
+        <div className="app-container">
+            <div className="login-section">
+                <div className="card">
+                    <div className="login-title">
+                        <h1>Transaction Notice Board</h1>
+                    </div>
                     <table className="payment-table">
                         <thead>
                             <tr>

@@ -360,3 +360,30 @@
     transform: translateX(26px);
   }
   
+  /* Table Styles */
+.payment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.payment-table th,
+.payment-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.payment-table th {
+  background-color: var(--bg-color);
+  color: var(--label-color);
+  font-weight: 500;
+}
+
+.payment-table td {
+  color: #424242;
+}
+
+.payment-table tr:hover {
+  background-color: #f1f1f1;
+}
+

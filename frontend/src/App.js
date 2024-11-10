@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
-import '../App.css';
+import './App.css'; 
+import { useTheme } from './ThemeContext';
 
-import EmployeeLogin from '../pages/EmployeeLogin';
-import CustomerLogin from '../pages/CustomerLogin';
-import Register from '../pages/Register';
-import PaymentHub from '../pages/CustomerPaymentHub';
-import Settings from '../pages/Settings';
+import EmployeeLogin from './pages/EmployeeLogin';
+import CustomerLogin from './pages/CustomerLogin';
+import Register from './pages/Register';
+import PaymentHub from './pages/CustomerPaymentHub';
+import Settings from './pages/Settings';
 
 const NavLink = ({ to, children, onClick }) => {
   const location = useLocation();
@@ -20,6 +21,7 @@ const NavLink = ({ to, children, onClick }) => {
 };
 
 function App() {
+  const { isDarkMode } = useTheme(); // Access theme state
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
@@ -41,7 +43,7 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container">
+      <div className={`app-container ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
         <button className="toggle-button" onClick={toggleSidebar}>
           ☰
         </button>
@@ -60,6 +62,7 @@ function App() {
               <>
                 <NavLink to="/" onClick={handleNavClick}>User Login</NavLink>
                 <NavLink to="/employeeLogin" onClick={handleNavClick}>Employee Login</NavLink>
+                <NavLink to="/register" onClick={handleNavClick}>Register</NavLink>
                 <NavLink to="/settings" onClick={handleNavClick}>Settings</NavLink>
               </>
             )}

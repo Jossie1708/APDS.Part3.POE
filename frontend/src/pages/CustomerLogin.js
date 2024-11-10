@@ -1,7 +1,6 @@
 
 import React from 'react';
-//import './CustomerLogin.css'; // Custom styles for the login page
-import '../App.css';  // Correct relative path to App.css
+import '../App.css';  
 
 
 function Login() {
@@ -11,7 +10,7 @@ function Login() {
       {/* Main Login Section */}
       <div className="login-section">
         <div className="login-form">
-        <div class="card">
+        <div className="card">
           <div className="login-title">
             <h1>Login</h1>
           </div>
