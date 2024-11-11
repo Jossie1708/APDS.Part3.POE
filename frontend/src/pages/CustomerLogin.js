@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
-function Login() {
+function CustomerLogin({ onLogin }) {  // Receive the onLogin function as a prop
   const [form, setForm] = useState({
     username: '',
     accountNumber: '',
@@ -38,6 +38,10 @@ function Login() {
       });
 
       if (response.ok) {
+        // Parse response for user data (e.g., token, user object)
+        const userData = await response.json(); // Assuming your API returns user data on success
+        onLogin(userData);  // Pass the user data to the onLogin function
+
         setForm({ username: '', accountNumber: '', password: '' });  // Reset the form on successful login
         navigate('/paymentHub');  // Redirect to the payment hub or dashboard
       } else {
@@ -92,4 +96,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default CustomerLogin;

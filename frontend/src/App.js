@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 import './App.css'; 
 import { useTheme } from './ThemeContext';
 
 import EmployeeLogin from './pages/EmployeeLogin';
-import CustomerLogin from './pages/CustomerLogin';
+import CustomerLogin from './pages/CustomerLogin'; 
 import Register from './pages/Register';
 import PaymentHub from './pages/CustomerPaymentHub';
 import Settings from './pages/Settings';
@@ -33,13 +33,23 @@ function App() {
     setIsSidebarCollapsed(true); // Close the sidebar when a nav link is clicked
   };
 
-  const handleLogin = () => {
-    setIsLoggedIn(true); // Set to true after successful login
+  const handleLogin = (userData) => {
+    setIsLoggedIn(true); // Set login status to true
+    localStorage.setItem('user', JSON.stringify(userData)); // Save user details in localStorage
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Reset login status on logout
+    setIsLoggedIn(false); // Set login status to false
+    localStorage.removeItem('user'); // Remove user details from localStorage
   };
+
+  useEffect(() => {
+    // Check if the user is logged in when the app mounts (based on localStorage)
+    const user = localStorage.getItem('user');
+    if (user) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   return (
     <Router>
@@ -62,7 +72,6 @@ function App() {
               <>
                 <NavLink to="/" onClick={handleNavClick}>User Login</NavLink>
                 <NavLink to="/employeeLogin" onClick={handleNavClick}>Employee Login</NavLink>
-
               </>
             )}
           </nav>
