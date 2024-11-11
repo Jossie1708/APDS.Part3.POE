@@ -9,7 +9,7 @@ function Login() {
         {/* Main Login Section */}
         <div className="login-section">
           <div className="login-form">
-          <div class="card">
+          <div className="card">
             <div className="login-title">
               <h1>Employee Login</h1>
             </div>

@@ -185,7 +185,7 @@
 
 .label {
   color: var(--label-color);
-  font-size: clamp(16px, 2vw, 20px); /* Responsive font size */
+  font-size: clamp(12px, 2vw, 14px); /* Responsive font size */
   font-weight: 500;
   text-align: left;
   margin-bottom: 5px; /* Adds some spacing between label and input */
@@ -227,12 +227,12 @@
 
 .input-field {
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   margin: 15px 0;
   background-color: var(--input-field-bg);
   border: none;
   border-radius: 5px;
-  font-size: clamp(14px, 1.5vw, 16px); /* Responsive font size */
+  font-size: clamp(12px, 1.5vw, 14px); /* Responsive font size */
 }
 
 .input-field::placeholder {
@@ -269,7 +269,7 @@
 /* Button Styles */
 .login-button {
   width: 200px;
-  padding: 15px;
+  padding: 10px;
   background-color: var(--button-bg);
   color: var(--nav-color-bg);
 
