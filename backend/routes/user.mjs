@@ -76,12 +76,12 @@ router.post("/login", bruteforce.prevent, async (req, res) => {
 
 // Admin login route
 router.post("/admin/login", bruteforce.prevent, async (req, res) => {
-    const { username, password } = req.body; // Assuming only admin's username and password are needed for login
-    console.log("Attempting admin login for:", username);
+    const { email, password } = req.body; // Assuming only admin's username and password are needed for login
+    console.log("Attempting admin login for:", email);
     
     try {
-        const collection = await db.collection("admins"); // Assuming admin users are stored in a collection named 'admins'
-        const admin = await collection.findOne({ username }); // Find the admin user by username
+        const collection = await db.collection("admin"); // Assuming admin users are stored in a collection named 'admins'
+        const admin = await collection.findOne({ email }); // Find the admin user by username
 
         if (!admin) {
             console.error("Admin user not found");
@@ -99,7 +99,7 @@ router.post("/admin/login", bruteforce.prevent, async (req, res) => {
         }
 
         // Generate a JWT token for the admin user
-        const token = jwt.sign({ username: admin.username }, "this_secret_should_be_longer_than_it_is", { expiresIn: "1h" });
+        const token = jwt.sign({ email: admin.email }, "this_secret_should_be_longer_than_it_is", { expiresIn: "1h" });
         console.log("Authentication successful, token generated:", token);
 
         // Respond with success and token
