@@ -196,7 +196,7 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%; /* Ensures both label and input are aligned within this container */
-  margin-bottom: 10px; /* Adds space between groups */
+  margin-bottom: 4px; /* Adds space between groups */
 }
 
 
@@ -210,20 +210,6 @@
   max-width: 450px;
   text-align: center;
 }
-
-.login-form h1 {
-  color: var(--text-color);
-}
-
-/* Title Style */
-.login-title {
-  padding: 20px;
-  width: 250px;
-  border-radius: 5px;
-  margin-bottom: 50px;
-  color: var(--text-color);
-}
-
 
 .input-field {
   width: 100%;
@@ -244,6 +230,21 @@
   outline-color: var(--link-field-bg);
 
 }
+
+.login-form h1 {
+  color: var(--text-color);
+}
+
+/* Title Style */
+.login-title {
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+
 
 /* Remember Me Section */
 .remember-me {

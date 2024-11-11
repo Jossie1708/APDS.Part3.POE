@@ -109,7 +109,8 @@ function PaymentHub() {
                                 <option value="GBP">GBP</option>
                                 <option value="ZAR">ZAR</option>
                             </select>
-
+                            </div>
+                            <div className="label-input-group">
                             <label className="label">Provider</label>
                             <select
                                 className="input-field"

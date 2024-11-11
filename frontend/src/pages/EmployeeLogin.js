@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
-function EmployeeLogin({ onLogin }) {  // Receive onLogin function as a prop
+function EmployeeLogin({ onLogin }) { 
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -36,9 +36,9 @@ function EmployeeLogin({ onLogin }) {  // Receive onLogin function as a prop
       });
 
       if (response.ok) {
-        const userData = await response.json(); // Assuming your API returns employee data on success
-        onLogin(userData);  // Pass the employee data to the onLogin function in App.js
-        setForm({ email: '', password: '' });  // Reset the form on successful login
+        const userData = await response.json();
+        onLogin(userData);  
+        setForm({ email: '', password: '' }); 
         navigate('/adminPortal');  
       } else {
         const errorData = await response.json();
