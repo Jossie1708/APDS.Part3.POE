@@ -74,4 +74,41 @@ router.post("/login", bruteforce.prevent, async (req, res) => {
     }
 });
 
+// Admin login route
+router.post("/admin/login", bruteforce.prevent, async (req, res) => {
+    const { username, password } = req.body; // Assuming only admin's username and password are needed for login
+    console.log("Attempting admin login for:", username);
+    
+    try {
+        const collection = await db.collection("admins"); // Assuming admin users are stored in a collection named 'admins'
+        const admin = await collection.findOne({ username }); // Find the admin user by username
+
+        if (!admin) {
+            console.error("Admin user not found");
+            return res.status(401).json({ message: "Authentication failed" });
+        }
+
+        // Log the hashed password from the database and the plain text password from the request
+        console.log("Admin password hash from DB:", admin.password);
+        console.log("Password from request body:", password);
+
+        const passwordMatch = await bcrypt.compare(password, admin.password);
+        if (!passwordMatch) {
+            console.error("Password mismatch");
+            return res.status(401).json({ message: "Authentication failed" });
+        }
+
+        // Generate a JWT token for the admin user
+        const token = jwt.sign({ username: admin.username }, "this_secret_should_be_longer_than_it_is", { expiresIn: "1h" });
+        console.log("Authentication successful, token generated:", token);
+
+        // Respond with success and token
+        res.status(200).json({ message: "Authentication successful", token, username: admin.username });
+    } catch (error) {
+        console.error("Admin login error:", error);
+        res.status(500).json({ message: "Login failed" });
+    }
+});
+
+
 export default router;

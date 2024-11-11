@@ -8,6 +8,7 @@ import CustomerLogin from './pages/CustomerLogin';
 import Register from './pages/Register';
 import PaymentHub from './pages/CustomerPaymentHub';
 import Settings from './pages/Settings';
+import AdminPortal from './pages/AdminPortal';
 
 const NavLink = ({ to, children, onClick }) => {
   const location = useLocation();
@@ -84,6 +85,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/paymentHub" element={<PaymentHub />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/adminPortal" element={<AdminPortal />}/>
           </Routes>
         </div>
       </div>

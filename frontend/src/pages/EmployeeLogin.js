@@ -27,7 +27,7 @@ function EmployeeLogin({ onLogin }) {  // Receive onLogin function as a prop
     };
 
     try {
-      const response = await fetch('https://localhost:3000/admin/login', {  // Update URL to match your backend route
+      const response = await fetch('https://localhost:3000/user/admin/login', {  
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ function EmployeeLogin({ onLogin }) {  // Receive onLogin function as a prop
         const userData = await response.json(); // Assuming your API returns employee data on success
         onLogin(userData);  // Pass the employee data to the onLogin function in App.js
         setForm({ email: '', password: '' });  // Reset the form on successful login
-        navigate('/dashboard');  // Redirect to the employee dashboard or other appropriate page
+        navigate('/adminPortal');  
       } else {
         const errorData = await response.json();
         window.alert(errorData.message || 'Login failed!');
