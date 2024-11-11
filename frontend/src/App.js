@@ -62,8 +62,7 @@ function App() {
               <>
                 <NavLink to="/" onClick={handleNavClick}>User Login</NavLink>
                 <NavLink to="/employeeLogin" onClick={handleNavClick}>Employee Login</NavLink>
-                <NavLink to="/register" onClick={handleNavClick}>Register</NavLink>
-                <NavLink to="/settings" onClick={handleNavClick}>Settings</NavLink>
+
               </>
             )}
           </nav>
