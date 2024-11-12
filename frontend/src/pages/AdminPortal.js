@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
-const Post = (props) => (
+const Post = ({ post, verifyPost, isVerified }) => (
     <tr>
-        <td>{props.post.user}</td>
-        <td>{props.post.amount}</td>
-        <td>{props.post.provider}</td>
-        <td>{props.post.currency}</td>
+        <td>{post.user}</td>
+        <td>{post.amount}</td>
+        <td>{post.provider}</td>
+        <td>{post.currency}</td>
         <td>
-            <button className="btn btn-link" onClick={() => props.deletePost(props.post._id)}>
-                Delete 
+            <button
+                className={`btn ${isVerified ? 'btn-success' : 'btn-link'}`}
+                onClick={() => verifyPost(post._id)}
+            >
+                {isVerified ? 'Verified' : 'Verify'}
             </button>
         </td>
     </tr>
@@ -18,62 +21,66 @@ const Post = (props) => (
 
 function AdminPortal() {
     const [posts, setPosts] = useState([]);
+    const [verifiedPosts, setVerifiedPosts] = useState({});
     const navigate = useNavigate();
 
-    // This method fetches the posts from the database
     useEffect(() => {
         async function getPosts() {
             try {
-                const token = localStorage.getItem('jwt');
-                if (!token) {
-                    console.error('No token found, user might not be authenticated');
-                    return; // Exit if no token is found
-                }
-
                 const response = await fetch('https://localhost:3000/post/transactions', {
                     method: 'GET',
                     headers: {
-                        'Authorization': `Bearer ${token}`, // Include the token for authentication
-                        'Content-Type': 'application/json', // Ensure the correct content type
+                        'Content-Type': 'application/json',
                     },
                 });
 
                 if (!response.ok) {
                     const message = `An error occurred: ${response.status} ${response.statusText}`;
-                    console.error(message); // Log the error for debugging
+                    console.error(message);
                     window.alert(message);
                     return;
                 }
 
                 const data = await response.json();
-                console.log('Received data:', data); // Log the received data
-                setPosts(data); // Set the posts to state
+                console.log('Received data:', data);
+                setPosts(data);
             } catch (error) {
-                console.error('Error fetching posts:', error); // Log the fetch error
+                console.error('Error fetching posts:', error);
             }
         }
 
-        getPosts(); // Call the function to fetch posts
-    }, []); // Empty dependency array to run once on mount
+        getPosts();
+    }, []);
 
-    // This method will delete a post
-    async function deletePost(id) {
+    const verifyPost = (id) => {
+        setVerifiedPosts((prev) => ({
+            ...prev,
+            [id]: !prev[id],  // Toggle verification status
+        }));
+    };
+
+    async function submitVerifiedPosts() {
         const token = localStorage.getItem("jwt");
-        await fetch(`https://localhost:3000/post/transactions/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-            },
-        });
+        const verifiedIds = Object.keys(verifiedPosts).filter(id => verifiedPosts[id]);
 
-        const newPosts = posts.filter((el) => el._id !== id);
-        setPosts(newPosts); // Update the post list after deletion
+        for (let id of verifiedIds) {
+            await fetch(`https://localhost:3000//post/transactions/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+        }
+
+        const newPosts = posts.filter((post) => !verifiedIds.includes(post._id));
+        setPosts(newPosts);
+        setVerifiedPosts({});
     }
 
     function handleLogout() {
         localStorage.removeItem("jwt");
         localStorage.removeItem("username");
-        navigate("/"); // Redirect to login page
+        navigate("/");
     }
 
     function renderPostList() {
@@ -81,15 +88,14 @@ function AdminPortal() {
             return <tr><td colSpan="5">No transactions found.</td></tr>;
         }
 
-        return posts.map((post) => {
-            return (
-                <Post
-                    post={post}
-                    deletePost={deletePost}
-                    key={post._id}
-                />
-            );
-        });
+        return posts.map((post) => (
+            <Post
+                post={post}
+                verifyPost={verifyPost}
+                isVerified={!!verifiedPosts[post._id]}
+                key={post._id}
+            />
+        ));
     }
 
     return (
@@ -111,6 +117,13 @@ function AdminPortal() {
                         </thead>
                         <tbody>{renderPostList()}</tbody>
                     </table>
+                    <button
+                        className="btn btn-primary"
+                        onClick={submitVerifiedPosts}
+                        style={{ marginTop: 20 }}
+                    >
+                        Submit Verified
+                    </button>
                 </div>
             </div>
         </div>

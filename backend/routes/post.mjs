@@ -5,38 +5,38 @@ import checkauth from "../check-auth.mjs";
 
 const router = express.Router();
 
-router.get("/transactions", checkauth, async (req, res) => {
+router.get("/transactions", async (req, res) => {
     try {
-        // Log the authenticated user
-        console.log("Authenticated user:", req.user);
-
+        // Connect to the collection
         const collection = await db.collection("posts");
-        const query = { user: req.user.username };
 
-        // Log the query being made
-        console.log("Querying transactions for user:", req.user.username);
+        // Log the action for tracing purposes
+        console.log("Fetching all transactions");
 
-        const results = await collection.find(query).toArray();
+        // Retrieve all transaction documents from the collection
+        const results = await collection.find({}).toArray();
+
+        // Send the data as a JSON response
         res.status(200).json(results);
     } catch (error) {
         console.error("Error fetching transactions:", error.message);
-        console.error(error.stack);  // This will log the stack trace
+        console.error(error.stack);  // Log the stack trace for debugging
         res.status(500).json({ error: "Failed to fetch transactions." });
     }
 });
 
 
+
 // Create a new transaction.
-router.post("/upload", checkauth, async (req, res) => {
+router.post("/upload", async (req, res) => {
     try {
         const newDocument = {
-            user: req.user.username,
+            user: req.body.username,
             amount: req.body.amount,
             currency: req.body.currency,
             provider: req.body.provider,
-            accountNumber: req.body.accountNumber,
-            swiftCode: req.body.swiftCode,
-        };
+            accountNumber: req.body.accountNumber
+                };
         const collection = await db.collection("posts");
         const result = await collection.insertOne(newDocument);
         res.status(201).json({ message: "Transaction created successfully", transactionId: result.insertedId });
@@ -52,11 +52,11 @@ router.patch("/:id", checkauth, async (req, res) => {
         const query = { _id: new ObjectId(req.params.id), user: req.user.username };
         const updates = {
             $set: {
+                user: req.body.username,
                 amount: req.body.amount,
                 currency: req.body.currency,
                 provider: req.body.provider,
                 accountNumber: req.body.accountNumber,
-                swiftCode: req.body.swiftCode,
             }
         };
         const collection = await db.collection("posts");

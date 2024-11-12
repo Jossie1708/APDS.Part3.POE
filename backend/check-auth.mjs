@@ -2,7 +2,10 @@ import jwt from "jsonwebtoken";
 
 const checkauth = (req, res, next) => {
     try {
+
         const token = req.headers.authorization.split(" ")[1]; // Get the token from the Authorization header
+        console.log("Token received:", token);
+
         const decoded = jwt.verify(token, "this_secret_should_be_longer_than_it_is"); // Verify the token
 
         // Attach the user's information to the request object

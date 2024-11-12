@@ -9,7 +9,6 @@ function PaymentHub() {
         currency: "",
         provider: "",
         accountNumber: "",
-        swiftCode: "",
     });
 
     const [loading, setLoading] = useState(false);  // For loading state
@@ -28,7 +27,7 @@ function PaymentHub() {
         setLoading(true);  // Start loading
 
         // Validation
-        if (!form.amount || !form.currency || !form.provider || !form.accountNumber || !form.swiftCode) {
+        if (!form.amount || !form.currency || !form.provider || !form.accountNumber) {
             window.alert("Please fill in all fields.");
             setLoading(false);  // Stop loading
             return;
@@ -41,9 +40,8 @@ function PaymentHub() {
             amount: form.amount,
             currency: form.currency,
             provider: form.provider,
-            accountNumber: form.accountNumber,
-            swiftCode: form.swiftCode,
-        };
+            accountNumber: form.accountNumber
+                };
 
         try {
             const response = await fetch("https://localhost:3000/post/upload", {
@@ -70,6 +68,7 @@ function PaymentHub() {
         }
     }
 
+    
     return (
         <div className="app-container">
             <div className="login-section">
@@ -131,16 +130,6 @@ function PaymentHub() {
                                 className="input-field"
                                 value={form.accountNumber}
                                 onChange={(e) => updateForm({ accountNumber: e.target.value })}
-                            />
-
-                            <label className="label">SWIFT Code</label>
-                            <input
-                                type="text"
-                                className="input-field"
-                                placeholder="Type your SWIFT code"
-                                id="swiftCode"
-                                value={form.swiftCode}
-                                onChange={(e) => updateForm({ swiftCode: e.target.value })}
                             />
                         </div>
                         <button className="login-button" onClick={onSubmit}>

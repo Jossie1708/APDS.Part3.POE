@@ -9,7 +9,7 @@ function Register() {
     accountNumber: '',
     password: '',
   });
-
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   function updateForm(value) {
@@ -18,8 +18,32 @@ function Register() {
     });
   }
 
+  // Password validation regex
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+  // Validation function for form fields
+  function validateForm() {
+    const newErrors = {};
+
+    if (!form.username) newErrors.username = 'Username is required.';
+    if (!form.idNumber) newErrors.idNumber = 'ID Number is required.';
+    if (!form.accountNumber) newErrors.accountNumber = 'Account Number is required.';
+    if (!form.password) {
+      newErrors.password = 'Password is required.';
+    } else if (!passwordRegex.test(form.password)) {
+      newErrors.password = 'Password must be at least 8 characters, include an uppercase letter, a lowercase letter, a number, and a special character.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
+
   async function onSubmit(e) {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;  // Stop submission if there are validation errors
+    }
 
     const newUser = { 
       username: form.username,
@@ -29,7 +53,7 @@ function Register() {
     };
 
     try {
-      const response = await fetch('https://localhost:3000/user/register', {  // Ensure this URL matches your backend route
+      const response = await fetch('https://localhost:3000/user/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +63,7 @@ function Register() {
 
       if (response.ok) {
         setForm({ username: '', idNumber: '', accountNumber: '', password: '' });
-        navigate('/');  // Redirect after successful registration
+        navigate('/');
       } else {
         const errorData = await response.json();
         window.alert(errorData.message || 'Signup failed!');
@@ -66,6 +90,8 @@ function Register() {
                 value={form.username}
                 onChange={(e) => updateForm({ username: e.target.value })}
               />
+              {errors.username && <p className="error-message">{errors.username}</p>}
+
               <label className="label">ID Number</label>
               <input
                 type="text"
@@ -74,6 +100,8 @@ function Register() {
                 value={form.idNumber}
                 onChange={(e) => updateForm({ idNumber: e.target.value })}
               />
+              {errors.idNumber && <p className="error-message">{errors.idNumber}</p>}
+
               <label className="label">Account Number</label>
               <input
                 type="text"
@@ -82,6 +110,8 @@ function Register() {
                 value={form.accountNumber}
                 onChange={(e) => updateForm({ accountNumber: e.target.value })}
               />
+              {errors.accountNumber && <p className="error-message">{errors.accountNumber}</p>}
+
               <label className="label">Password</label>
               <input
                 type="password"
@@ -90,6 +120,7 @@ function Register() {
                 value={form.password}
                 onChange={(e) => updateForm({ password: e.target.value })}
               />
+              {errors.password && <p className="error-message">{errors.password}</p>}
             </div>
             <button className="login-button" onClick={onSubmit}>Sign up</button>
             <button className="login-button" onClick={() => navigate('/')}>Back</button>

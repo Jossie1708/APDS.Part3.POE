@@ -42,6 +42,8 @@
   }
   
   .app-container {
+    max-height: 100vh;  /* Set the maximum height to the viewport height */
+    overflow-y: auto;   /* Enable vertical scrolling */
     display: flex;
     height: 100vh; /* Full viewport height */
     width: 100vw; /* Full viewport width */
